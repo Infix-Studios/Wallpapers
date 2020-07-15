@@ -4,6 +4,7 @@ package infix.studios.wallpapers.model
 import com.google.gson.annotations.SerializedName
 
 class Photo : ArrayList<Photo.PhotoItem>(){
+
     data class PhotoItem(
         @SerializedName("alt_description")
         val altDescription: String,
