@@ -50,7 +50,6 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
 
-
     // Architecture Components
     implementation "androidx.room:room-runtime:$roomVersion"
     kapt "androidx.room:room-compiler:$roomVersion"
@@ -125,7 +124,6 @@ dependencies {
     // Gson
     implementation 'com.squareup.retrofit2:converter-gson:2.6.1'
     implementation 'com.google.code.gson:gson:2.8.5'
-
 
     // Glide
     implementation "com.github.bumptech.glide:glide:$glide"
