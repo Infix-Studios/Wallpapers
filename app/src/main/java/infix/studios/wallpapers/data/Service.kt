@@ -8,7 +8,8 @@ interface Service {
 
     @GET("photos/")
     suspend fun getPhotos(
-        @Query("client_id") client_id: String
+        @Query("client_id") client_id: String,
+        @Query("per_page") per_page: Int
     ): Photo
 
 }
