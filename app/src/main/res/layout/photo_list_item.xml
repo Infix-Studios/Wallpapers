@@ -7,11 +7,16 @@
         <variable
             name="photoItem"
             type="infix.studios.wallpapers.model.Photo.PhotoItem" />
+
+        <variable
+            name="clickListener"
+            type="infix.studios.wallpapers.feed.ClickListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:onClick="@{() -> clickListener.onClick(photoItem)}">
 
         <ImageView
             android:id="@+id/imageView"
@@ -26,3 +31,14 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
+
+<!--<ImageView-->
+<!--android:id="@+id/imageView"-->
+<!--android:layout_width="200dp"-->
+<!--android:layout_height="200dp"-->
+<!--app:layout_constraintBottom_toBottomOf="parent"-->
+<!--app:layout_constraintEnd_toEndOf="parent"-->
+<!--app:layout_constraintStart_toStartOf="parent"-->
+<!--app:layout_constraintTop_toTopOf="parent"-->
+<!--app:photoUrl="@{photoItem.Urls.thumb}"-->
+<!--tools:srcCompat="@tools:sample/avatars" />-->

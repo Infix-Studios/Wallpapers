@@ -5,8 +5,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 
 import infix.studios.wallpapers.R
+import infix.studios.wallpapers.databinding.FragmentFeedDetailsBinding
+import timber.log.Timber
 
 /**
  * A simple [Fragment] subclass.
@@ -17,8 +20,17 @@ class FeedDetailsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_feed_details, container, false)
+
+        val binding: FragmentFeedDetailsBinding = DataBindingUtil
+            .inflate(inflater, R.layout.fragment_feed_details, container, false)
+
+//        val args = FeedDetailsFragmentArgs.fromBundle(requireArguments())
+//
+//        binding.photoItem = args.photoItem
+
+        Timber.i("\n\n**************details")
+
+        return binding.root
     }
 
 }

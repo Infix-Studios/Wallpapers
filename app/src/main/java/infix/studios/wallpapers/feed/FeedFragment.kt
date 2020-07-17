@@ -2,17 +2,16 @@ package infix.studios.wallpapers.feed
 
 import android.app.AlertDialog
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import dagger.android.support.DaggerFragment
 import infix.studios.wallpapers.R
 import infix.studios.wallpapers.databinding.FragmentFeedBinding
-import infix.studios.wallpapers.databinding.PhotoListItemBinding
 import infix.studios.wallpapers.di.ViewModelProviderFactory
 import infix.studios.wallpapers.model.Photo
 import infix.studios.wallpapers.util.Resource
@@ -50,7 +49,12 @@ class FeedFragment : DaggerFragment() {
 
         viewModel = ViewModelProvider(this, factory).get(FeedViewModel::class.java)
 
-        adapter = FeedAdapter()
+//        adapter = FeedAdapter()
+
+        adapter = FeedAdapter(ClickListener {
+            this.findNavController().navigate(FeedFragmentDirections
+                .actionFeedFragmentToFeedDetailsFragment())
+        })
 
         binding.recyclerView.adapter = adapter
 
@@ -84,10 +88,11 @@ class FeedFragment : DaggerFragment() {
         binding.progressBar.visibility = View.GONE
         binding.recyclerView.visibility = View.VISIBLE
         adapter.submitList(photo)
+
+        Timber.i("\n\n**************fragmnet: ${photo}")
         if (!isNetworkAvailable(context)){
             showError("No internet")
         }
     }
-
 
 }
