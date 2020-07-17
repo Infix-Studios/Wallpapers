@@ -23,8 +23,8 @@
         <action
             android:id="@+id/action_feedDetailsFragment_to_feedFragment"
             app:destination="@id/feedFragment" />
-<!--        <argument-->
-<!--            android:name="photoItem"-->
-<!--            app:argType="infix.studios.wallpapers.model.Photo.PhotoItem"/>-->
+        <argument
+            android:name="photoItem"
+            app:argType="infix.studios.wallpapers.model.Photo$PhotoItem" />
     </fragment>
 </navigation>

@@ -1,35 +1,39 @@
 package infix.studios.wallpapers.model
 
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
+import kotlinx.android.parcel.RawValue
 
 class Photo : ArrayList<Photo.PhotoItem>(){
 
+    @Parcelize
     data class PhotoItem(
         @SerializedName("alt_description")
         val altDescription: String,
-        val categories: List<Any>,
+        val categories: List<@RawValue Any>,
         val color: String,
         @SerializedName("created_at")
         val createdAt: String,
         @SerializedName("current_user_collections")
-        val currentUserCollections: List<Any>,
+        val currentUserCollections: List<@RawValue Any>,
         val description: String,
         val height: Int,
         val id: String,
         @SerializedName("liked_by_user")
         val likedByUser: Boolean,
         val likes: Int,
-        val links: Links,
+        val links: @RawValue Links,
         @SerializedName("promoted_at")
         val promotedAt: String,
-        val sponsorship: Sponsorship,
+        val sponsorship: @RawValue Sponsorship,
         @SerializedName("updated_at")
         val updatedAt: String,
         val urls: Urls,
-        val user: User,
+        val user: @RawValue User,
         val width: Int
-    ) {
+    ) : Parcelable {
         data class Links(
             val download: String,
             @SerializedName("download_location")
@@ -37,7 +41,7 @@ class Photo : ArrayList<Photo.PhotoItem>(){
             val html: String,
             val self: String
         )
-    
+
         data class Sponsorship(
             @SerializedName("impression_urls")
             val impressionUrls: List<String>,
@@ -93,15 +97,16 @@ class Photo : ArrayList<Photo.PhotoItem>(){
                 )
             }
         }
-    
+
+        @Parcelize
         data class Urls(
             val full: String,
             val raw: String,
             val regular: String,
             val small: String,
             val thumb: String
-        )
-    
+        ) : Parcelable
+
         data class User(
             @SerializedName("accepted_tos")
             val acceptedTos: Boolean,

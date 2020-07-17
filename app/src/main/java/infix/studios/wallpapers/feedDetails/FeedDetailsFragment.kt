@@ -24,9 +24,9 @@ class FeedDetailsFragment : Fragment() {
         val binding: FragmentFeedDetailsBinding = DataBindingUtil
             .inflate(inflater, R.layout.fragment_feed_details, container, false)
 
-//        val args = FeedDetailsFragmentArgs.fromBundle(requireArguments())
-//
-//        binding.photoItem = args.photoItem
+        val args = FeedDetailsFragmentArgs.fromBundle(requireArguments())
+
+        binding.photoItem = args.photoItem
 
         Timber.i("\n\n**************details")
 

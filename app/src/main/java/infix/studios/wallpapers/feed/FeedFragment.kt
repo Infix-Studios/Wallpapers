@@ -53,7 +53,7 @@ class FeedFragment : DaggerFragment() {
 
         adapter = FeedAdapter(ClickListener {
             this.findNavController().navigate(FeedFragmentDirections
-                .actionFeedFragmentToFeedDetailsFragment())
+                .actionFeedFragmentToFeedDetailsFragment(it))
         })
 
         binding.recyclerView.adapter = adapter
