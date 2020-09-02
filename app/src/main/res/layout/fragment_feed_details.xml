@@ -12,18 +12,45 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".feedDetails.FeedDetailsFragment">
+        tools:context=".feeddetails.FeedDetailsFragment">
 
         <ImageView
-            android:id="@+id/imageView2"
+            android:id="@+id/feed_details_imageView"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:contentDescription="@string/image_view_content_description"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:src="@tools:sample/backgrounds/scenic"
-            app:photoUrl="@{photoItem.Urls.regular}"/>
+            app:photoUrl="@{photoItem.Urls.regular}"
+            tools:src="@tools:sample/backgrounds/scenic" />
 
+        <Button
+            android:id="@+id/share_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:text="@string/share"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/set_wallpaper_button"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_chainStyle="spread"
+            app:layout_constraintStart_toEndOf="@+id/feed_details_imageView" />
+
+        <Button
+            android:id="@+id/set_wallpaper_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:text="@string/set_wallpaper"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/feed_details_imageView"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/share_button" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -17,7 +17,7 @@
 
     <fragment
         android:id="@+id/feedDetailsFragment"
-        android:name="infix.studios.wallpapers.feedDetails.FeedDetailsFragment"
+        android:name="infix.studios.wallpapers.feeddetails.FeedDetailsFragment"
         android:label="Wallpaper"
         tools:layout="@layout/fragment_feed_details" >
         <action

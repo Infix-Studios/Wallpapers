@@ -1,4 +1,4 @@
-package infix.studios.wallpapers.feed
+package infix.studios.wallpapers.home
 
 import android.app.AlertDialog
 import android.os.Bundle
@@ -8,10 +8,9 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
 import dagger.android.support.DaggerFragment
 import infix.studios.wallpapers.R
-import infix.studios.wallpapers.databinding.FragmentFeedBinding
+import infix.studios.wallpapers.databinding.HomeFragmentBinding
 import infix.studios.wallpapers.di.ViewModelProviderFactory
 import infix.studios.wallpapers.model.Photo
 import infix.studios.wallpapers.util.ClickListener
@@ -21,14 +20,15 @@ import kotlinx.android.synthetic.main.empty.view.*
 import timber.log.Timber
 import javax.inject.Inject
 
-class FeedFragment : DaggerFragment() {
+class HomeFragment : DaggerFragment() {
 
     @Inject
     lateinit var factory: ViewModelProviderFactory
 
-    private lateinit var viewModel: FeedViewModel
-    private lateinit var adapter: FeedAdapter
-    private lateinit var binding: FragmentFeedBinding
+    private lateinit var viewModel: HomeViewModel
+    private lateinit var binding: HomeFragmentBinding
+    private lateinit var adapter: HomeAdapter
+
 
     private val observer = Observer<Resource<Photo>> {
         when (it.status) {
@@ -43,17 +43,12 @@ class FeedFragment : DaggerFragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        binding = DataBindingUtil.inflate(
-            inflater, R.layout.fragment_feed,
-            container, false
-        )
+        binding = DataBindingUtil.inflate(inflater, R.layout.home_fragment, container, false)
 
-        viewModel = ViewModelProvider(this, factory).get(FeedViewModel::class.java)
+        viewModel = ViewModelProvider(this, factory).get(HomeViewModel::class.java)
 
+        adapter = HomeAdapter(ClickListener {
 
-        adapter = FeedAdapter(ClickListener {
-            this.findNavController().navigate(FeedFragmentDirections
-                .actionFeedFragmentToFeedDetailsFragment(it))
         })
 
         binding.recyclerView.adapter = adapter

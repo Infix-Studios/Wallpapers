@@ -1,12 +1,13 @@
-package infix.studios.wallpapers.feedDetails
+package infix.studios.wallpapers.feeddetails
 
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-
+import androidx.fragment.app.Fragment
 import infix.studios.wallpapers.R
 import infix.studios.wallpapers.databinding.FragmentFeedDetailsBinding
 import timber.log.Timber
@@ -29,6 +30,10 @@ class FeedDetailsFragment : Fragment() {
         binding.photoItem = args.photoItem
 
         Timber.i("\n\n**************details")
+
+        val actionBar: android.app.ActionBar? = requireActivity().actionBar
+
+        actionBar?.setBackgroundDrawable(ColorDrawable(Color.parseColor("#80000000")))
 
         return binding.root
     }

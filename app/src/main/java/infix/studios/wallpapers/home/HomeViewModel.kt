@@ -1,4 +1,4 @@
-package infix.studios.wallpapers.feed
+package infix.studios.wallpapers.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
@@ -8,8 +8,7 @@ import kotlinx.coroutines.Dispatchers
 import timber.log.Timber
 import javax.inject.Inject
 
-class FeedViewModel @Inject constructor(private val repository: DefaultRepository): ViewModel() {
-
+class HomeViewModel @Inject constructor(private val repository: DefaultRepository): ViewModel() {
     val getPhotos = liveData(Dispatchers.IO){
         emit(Resource.loading(null))
 

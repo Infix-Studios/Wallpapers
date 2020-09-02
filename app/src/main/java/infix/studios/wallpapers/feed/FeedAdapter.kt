@@ -7,9 +7,11 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import infix.studios.wallpapers.databinding.PhotoListItemBinding
 import infix.studios.wallpapers.model.Photo
+import infix.studios.wallpapers.util.ClickListener
+import infix.studios.wallpapers.util.DataDiffCallback
 
 class FeedAdapter(private val clickListener: ClickListener) :
-    ListAdapter<Photo.PhotoItem, RecyclerView.ViewHolder>(DataDiffCallback()){
+    ListAdapter<Photo.PhotoItem, RecyclerView.ViewHolder>(DataDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return FeedViewHolder(PhotoListItemBinding.inflate(LayoutInflater.from(parent.context),
@@ -32,20 +34,6 @@ class FeedAdapter(private val clickListener: ClickListener) :
             }
         }
     }
-}
-
-private class DataDiffCallback: DiffUtil.ItemCallback<Photo.PhotoItem>(){
-    override fun areItemsTheSame(oldItem: Photo.PhotoItem, newItem: Photo.PhotoItem): Boolean {
-        return oldItem == newItem
-    }
-
-    override fun areContentsTheSame(oldItem: Photo.PhotoItem, newItem: Photo.PhotoItem): Boolean {
-        return oldItem == newItem
-    }
-}
-
-class ClickListener(val clickListener: (photoItem: Photo.PhotoItem) -> Unit) {
-    fun onClick(photoItem: Photo.PhotoItem) = clickListener(photoItem)
 }
 
 

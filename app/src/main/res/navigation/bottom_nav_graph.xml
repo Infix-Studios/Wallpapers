@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/bottom_nav_graph"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="infix.studios.wallpapers.home.HomeFragment"
+        android:label="Home"
+        tools:layout="@layout/home_fragment" />
+    <fragment
+        android:id="@+id/categoriesFragment"
+        android:name="infix.studios.wallpapers.categories.CategoriesFragment"
+        android:label="Categories"
+        tools:layout="@layout/categories_fragment" />
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="infix.studios.wallpapers.search.SearchFragment"
+        android:label="Search"
+        tools:layout="@layout/search_fragment" />
+    <fragment
+        android:id="@+id/favoriteFragment"
+        android:name="infix.studios.wallpapers.favorite.FavoriteFragment"
+        android:label="Favorite"
+        tools:layout="@layout/favorite_fragment" />
+</navigation>
