@@ -26,7 +26,7 @@ class HomeAdapter(private val clickListener: ClickListener) :
     class HomeViewHolder(private val binding: PhotoListItemBinding):
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(listener: ClickListener, item: Photo.PhotoItem){
+        fun bind(listener: ClickListener, item: Photo.PhotoItem) {
             binding.apply {
                 clickListener = listener
                 photoItem = item

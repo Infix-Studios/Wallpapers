@@ -9,7 +9,11 @@
         android:id="@+id/homeFragment"
         android:name="infix.studios.wallpapers.home.HomeFragment"
         android:label="Home"
-        tools:layout="@layout/home_fragment" />
+        tools:layout="@layout/home_fragment" >
+        <action
+            android:id="@+id/action_homeFragment_to_homeDetailsFragment"
+            app:destination="@id/homeDetailsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/categoriesFragment"
         android:name="infix.studios.wallpapers.categories.CategoriesFragment"
@@ -25,4 +29,15 @@
         android:name="infix.studios.wallpapers.favorite.FavoriteFragment"
         android:label="Favorite"
         tools:layout="@layout/favorite_fragment" />
+    <fragment
+        android:id="@+id/homeDetailsFragment"
+        android:name="infix.studios.wallpapers.homedetails.HomeDetailsFragment"
+        android:label="HomeDetailsFragment" >
+        <action
+            android:id="@+id/action_homeDetailsFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+        <argument
+            android:name="photoItem"
+            app:argType="infix.studios.wallpapers.model.Photo$PhotoItem" />
+    </fragment>
 </navigation>

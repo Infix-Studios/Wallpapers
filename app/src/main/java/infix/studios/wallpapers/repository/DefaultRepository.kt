@@ -18,7 +18,7 @@ class DefaultRepository(val responseHandler: ResponseHandler, val service: Servi
 
         try {
             val getPhotos = service.getPhotos(ACCESS_KEY, IMAGES_PER_PAGE)
-            Timber.i("\n\n**************\nRepository: ${getPhotos}")
+            // Timber.i("\n\n**************\nRepository: ${getPhotos}")
             return responseHandler.handleSuccess(getPhotos)
 
         } catch(ex:Exception) {

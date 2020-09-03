@@ -84,7 +84,7 @@ class HomeFragment : DaggerFragment() {
         binding.recyclerView.visibility = View.VISIBLE
         adapter.submitList(photo)
 
-        Timber.i("\n\n**************fragmnet: ${photo}")
+        Timber.i("\n\n*****HomeFragment: ${photo?.get(6)?.likes}")
         if (!isNetworkAvailable(context)){
             showError("No internet")
         }

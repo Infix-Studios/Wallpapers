@@ -12,10 +12,10 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".feeddetails.FeedDetailsFragment">
+        tools:context=".homedetails.HomeDetailsFragment">
 
         <ImageView
-            android:id="@+id/feed_details_imageView"
+            android:id="@+id/home_details_imageView"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:contentDescription="@string/image_view_content_description"
@@ -38,7 +38,7 @@
             app:layout_constraintEnd_toStartOf="@+id/set_wallpaper_button"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintHorizontal_chainStyle="spread"
-            app:layout_constraintStart_toEndOf="@+id/feed_details_imageView" />
+            app:layout_constraintStart_toEndOf="@+id/home_details_imageView" />
 
         <Button
             android:id="@+id/set_wallpaper_button"
@@ -49,7 +49,7 @@
             android:layout_marginBottom="16dp"
             android:text="@string/set_wallpaper"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/feed_details_imageView"
+            app:layout_constraintEnd_toStartOf="@+id/home_details_imageView"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/share_button" />
     </androidx.constraintlayout.widget.ConstraintLayout>

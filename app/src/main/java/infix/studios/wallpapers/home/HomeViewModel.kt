@@ -9,11 +9,11 @@ import timber.log.Timber
 import javax.inject.Inject
 
 class HomeViewModel @Inject constructor(private val repository: DefaultRepository): ViewModel() {
+
     val getPhotos = liveData(Dispatchers.IO){
         emit(Resource.loading(null))
-
         val getPhotosList = repository.getPhotos()
         emit(getPhotosList)
-        Timber.i("\n\n**************\nViewmodel: ${getPhotosList.data}")
+        Timber.i("\n\n**************\nViewmodel: ${getPhotosList.data?.get(6)?.description}")
     }
 }
