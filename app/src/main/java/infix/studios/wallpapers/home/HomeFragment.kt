@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import dagger.android.support.DaggerFragment
 import infix.studios.wallpapers.R
 import infix.studios.wallpapers.databinding.HomeFragmentBinding
@@ -48,7 +49,8 @@ class HomeFragment : DaggerFragment() {
         viewModel = ViewModelProvider(this, factory).get(HomeViewModel::class.java)
 
         adapter = HomeAdapter(ClickListener {
-
+            this.findNavController().navigate(HomeFragmentDirections
+                .actionHomeFragmentToHomeDetailsFragment(it))
         })
 
         binding.recyclerView.adapter = adapter

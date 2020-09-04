@@ -2,6 +2,8 @@ package infix.studios.wallpapers
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
@@ -21,18 +23,26 @@ class MainActivity : AppCompatActivity() {
         setupViews()
     }
 
+    fun showBottomNavigation() {
+        bottomNavView.visibility = VISIBLE
+    }
+
+    fun hideBottomNavigation() {
+        bottomNavView.visibility = GONE
+    }
+
     private fun setupViews() {
         // Finding the Navigation Controller
-        var navHostFragment = supportFragmentManager.findFragmentById(R.id.fragNavHost) as NavHostFragment
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.fragNavHost) as NavHostFragment
         navController = navHostFragment.navController
 
         NavigationUI.setupWithNavController(bottomNavView, navHostFragment.navController)
 
-
         // Setting Up ActionBar with Navigation Controller
         // Pass the IDs of top-level destinations in AppBarConfiguration
         val appBarConfiguration = AppBarConfiguration(
-            topLevelDestinationIds = setOf (
+            topLevelDestinationIds = setOf(
                 R.id.homeFragment,
                 R.id.categoriesFragment,
                 R.id.searchFragment,
@@ -43,5 +53,9 @@ class MainActivity : AppCompatActivity() {
         // Setting Up ActionBar with Navigation Controller
         setupActionBarWithNavController(navHostFragment.navController, appBarConfiguration)
 
+    }
+    override fun onSupportNavigateUp(): Boolean {
+        val navController = this.findNavController(R.id.fragNavHost)
+        return navController.navigateUp()
     }
 }
