@@ -1,4 +1,4 @@
-package infix.studios.wallpapers.homedetails
+package infix.studios.wallpapers.categories.categorylistdetails
 
 import android.content.Context
 import android.os.Bundle
@@ -12,32 +12,31 @@ import androidx.navigation.fragment.navArgs
 import dagger.android.support.DaggerFragment
 import infix.studios.wallpapers.MainActivity
 import infix.studios.wallpapers.R
-import infix.studios.wallpapers.databinding.HomeDetailsFragmentBinding
+import infix.studios.wallpapers.databinding.CategoryListDetailsFragmentBinding
 import infix.studios.wallpapers.di.ViewModelProviderFactory
+import infix.studios.wallpapers.search.searchdetails.SearchDetailsFragmentArgs
 import javax.inject.Inject
 
-class HomeDetailsFragment : DaggerFragment() {
+class CategoryListDetailsFragment : DaggerFragment() {
 
     @Inject
     lateinit var factory: ViewModelProviderFactory
 
-    private lateinit var viewModel: HomeDetailsViewModel
-    private lateinit var binding: HomeDetailsFragmentBinding
-    private val args: HomeDetailsFragmentArgs by navArgs()
+    private lateinit var binding: CategoryListDetailsFragmentBinding
+    private lateinit var viewModel: CategoryListDetailsViewModel
+    private val args: CategoryListDetailsFragmentArgs by navArgs()
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        binding = DataBindingUtil.inflate(inflater, R.layout.home_details_fragment, container, false)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+                              savedInstanceState: Bundle?): View? {
+        binding = DataBindingUtil.inflate(inflater,R.layout.category_list_details_fragment, container, false)
 
-        viewModel = ViewModelProvider(this, factory).get(HomeDetailsViewModel::class.java)
+        viewModel = ViewModelProvider(this, factory).get(CategoryListDetailsViewModel::class.java)
+
+        viewModel.setPhoto(args.result)
 
         viewModel.photo.observe(viewLifecycleOwner, Observer {
-            binding.photoItem =  it
+            binding.result =  it
         })
-
-        viewModel.setPhoto(args.photoItem)
 
         return binding.root
     }
@@ -51,5 +50,6 @@ class HomeDetailsFragment : DaggerFragment() {
         (activity as MainActivity).showBottomNavigation()
         super.onDetach()
     }
+
 
 }

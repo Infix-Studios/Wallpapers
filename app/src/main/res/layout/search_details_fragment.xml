@@ -5,14 +5,14 @@
 
     <data>
         <variable
-            name="photoItem"
-            type="infix.studios.wallpapers.model.Photo.PhotoItem" />
+            name="result"
+            type="infix.studios.wallpapers.model.PhotoSearch.Result" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".home.homedetails.HomeDetailsFragment">
+        tools:context=".search.searchdetails.SearchDetailsFragment">
 
         <ImageView
             android:id="@+id/search_details_imageView"
@@ -23,7 +23,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:photoUrl="@{photoItem.Urls.regular}"
+            app:photoUrl="@{result.Urls.regular}"
             tools:src="@tools:sample/backgrounds/scenic" />
 
         <Button

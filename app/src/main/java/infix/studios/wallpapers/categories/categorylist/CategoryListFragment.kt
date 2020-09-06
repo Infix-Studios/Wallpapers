@@ -1,84 +1,54 @@
-package infix.studios.wallpapers.search
+package infix.studios.wallpapers.categories.categorylist
 
 import android.app.AlertDialog
 import android.os.Bundle
-import android.view.*
-import android.widget.SearchView
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import dagger.android.support.DaggerFragment
 import infix.studios.wallpapers.R
-import infix.studios.wallpapers.databinding.SearchFragmentBinding
+import infix.studios.wallpapers.categories.categorylistdetails.CategoryListDetailsFragmentArgs
+import infix.studios.wallpapers.databinding.CategoryListFragmentBinding
 import infix.studios.wallpapers.di.ViewModelProviderFactory
-import infix.studios.wallpapers.model.Photo
 import infix.studios.wallpapers.model.PhotoSearch
-import infix.studios.wallpapers.util.*
+import infix.studios.wallpapers.util.ClickListenerSearch
+import infix.studios.wallpapers.util.Resource
+import infix.studios.wallpapers.util.isNetworkAvailable
 import kotlinx.android.synthetic.main.empty.view.*
 import timber.log.Timber
 import javax.inject.Inject
 
-class SearchFragment : DaggerFragment() {
+class CategoryListFragment : DaggerFragment() {
 
     @Inject
     lateinit var factory: ViewModelProviderFactory
 
-    private lateinit var binding: SearchFragmentBinding
-    private lateinit var viewModel: SearchViewModel
-    private lateinit var adapter: SearchAdapter
+    private lateinit var binding: CategoryListFragmentBinding
+    private lateinit var viewModel: CategoryListViewModel
+    private lateinit var adapter: CategoryListAdapter
+    private val args: CategoryListFragmentArgs by navArgs()
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        binding = DataBindingUtil.inflate(inflater, R.layout.search_fragment, container, false)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+                              savedInstanceState: Bundle?): View? {
+        binding = DataBindingUtil.inflate(inflater, R.layout.category_list_fragment, container, false)
 
-        viewModel = ViewModelProvider(this, factory).get(SearchViewModel::class.java)
+        viewModel = ViewModelProvider(this, factory).get(CategoryListViewModel::class.java)
 
-        adapter = SearchAdapter(ClickListenerSearch {
-            this.findNavController().navigate(
-                    SearchFragmentDirections.actionSearchFragmentToSearchDetailsFragment(it))
+        adapter = CategoryListAdapter(ClickListenerSearch {
+            this.findNavController().navigate(CategoryListFragmentDirections
+                    .actionCategoryListFragmentToCategoryListDetailsFragment(it))
         })
 
         binding.recyclerView.adapter = adapter
 
-        setHasOptionsMenu(true)
+        searchWallpapers(args.category)
 
         return binding.root
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.search_menu, menu)
-
-        val search = menu.findItem(R.id.search_bar)
-        val searchView = search.actionView as SearchView
-        searchView.queryHint = "Search wallpapers..."
-
-        searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(p0: String?): Boolean {
-                if (p0 != null) {
-                    searchWallpapers(p0)
-                }
-                return true
-            }
-
-            override fun onQueryTextChange(p0: String?): Boolean {
-                return true
-            }
-        })
-
-        searchView.setOnCloseListener {
-            // Hides keyboard
-            view?.hideKeyboard()
-
-            // Removes focus from searchView
-            searchView.clearFocus()
-
-            // After clicking cross (x), searchView bar collapses & goes back to original position
-            searchView.onActionViewCollapsed()
-            return@setOnCloseListener true
-        }
     }
 
     private fun searchWallpapers(query: String) {
@@ -122,4 +92,5 @@ class SearchFragment : DaggerFragment() {
             showError("No internet")
         }
     }
+
 }

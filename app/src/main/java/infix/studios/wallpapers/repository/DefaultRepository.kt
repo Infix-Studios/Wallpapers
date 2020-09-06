@@ -2,6 +2,7 @@ package infix.studios.wallpapers.repository
 
 import infix.studios.wallpapers.data.Service
 import infix.studios.wallpapers.model.Photo
+import infix.studios.wallpapers.model.PhotoSearch
 import infix.studios.wallpapers.util.ACCESS_KEY
 import infix.studios.wallpapers.util.IMAGES_PER_PAGE
 import infix.studios.wallpapers.util.Resource
@@ -9,10 +10,12 @@ import infix.studios.wallpapers.util.ResponseHandler
 import retrofit2.HttpException
 import timber.log.Timber
 import java.net.SocketTimeoutException
+import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class DefaultRepository(val responseHandler: ResponseHandler, val service: Service) : Repository {
+class DefaultRepository @Inject constructor(val responseHandler: ResponseHandler,
+                                            val service: Service) : Repository {
 
     override suspend fun getPhotos(): Resource<Photo> {
 
@@ -34,6 +37,27 @@ class DefaultRepository(val responseHandler: ResponseHandler, val service: Servi
             }
         }
 
+    }
+
+    override suspend fun searchPhotos(query: String): Resource<PhotoSearch> {
+        try {
+            val getPhotos = service.searchPhotos(ACCESS_KEY, query, IMAGES_PER_PAGE)
+            //Timber.i("\n\n**************\nRepository Search: ${getPhotos}")
+            return responseHandler.handleSuccess(getPhotos)
+
+        } catch(ex:Exception) {
+            Timber.i("\n\n**************\nRepository Search error: $ex")
+            return when(ex) {
+                is HttpException -> {
+                    responseHandler.handleException((ex as HttpException).code())
+                }
+                is SocketTimeoutException -> {
+                    // handle
+                    Resource.error("Connection failed", null)
+                }
+                else -> Resource.error("Connection Failed", null)
+            }
+        }
     }
 
 }

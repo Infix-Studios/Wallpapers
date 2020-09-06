@@ -16,4 +16,10 @@
     <string name="categories">Categories</string>
     <string name="search">Search</string>
     <string name="favorite">Favorite</string>
+    <string name="nature">Nature</string>
+    <string name="art">Art</string>
+    <string name="architecture">Architecture</string>
+    <string name="sky_high">Sky high</string>
+    <string name="animals">Animals</string>
+    <string name="cars">Cars</string>
 </resources>

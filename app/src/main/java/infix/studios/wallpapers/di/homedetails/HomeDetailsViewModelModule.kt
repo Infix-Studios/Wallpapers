@@ -5,7 +5,7 @@ import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
 import infix.studios.wallpapers.di.ViewModelKey
-import infix.studios.wallpapers.homedetails.HomeDetailsViewModel
+import infix.studios.wallpapers.home.homedetails.HomeDetailsViewModel
 
 @Module
 abstract class HomeDetailsViewModelModule {

@@ -1,4 +1,4 @@
-package infix.studios.wallpapers.homedetails
+package infix.studios.wallpapers.home.homedetails
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

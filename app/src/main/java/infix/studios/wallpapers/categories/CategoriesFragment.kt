@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import dagger.android.support.DaggerFragment
 import infix.studios.wallpapers.R
 import infix.studios.wallpapers.databinding.CategoriesFragmentBinding
@@ -28,7 +29,23 @@ class CategoriesFragment : DaggerFragment() {
 
         viewModel = ViewModelProvider(this, factory).get(CategoriesViewModel::class.java)
 
+        binding.animalsCategoryButton.setOnClickListener { moveToCategoryList("nature") }
+
+        binding.architectureCategoryButton.setOnClickListener { moveToCategoryList("architecture") }
+
+        binding.artCategoryButton.setOnClickListener { moveToCategoryList("art") }
+
+        binding.carsCategoryButton.setOnClickListener { moveToCategoryList("cars") }
+
+        binding.skyCategoryButton.setOnClickListener { moveToCategoryList("sky") }
+
+        binding.natureCategoryButton.setOnClickListener { moveToCategoryList("nature") }
+
         return binding.root
     }
 
+    private fun moveToCategoryList(category: String) {
+        this.findNavController().navigate(CategoriesFragmentDirections
+                .actionCategoriesFragmentToCategoryListFragment(category))
+    }
 }

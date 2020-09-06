@@ -18,12 +18,20 @@
         android:id="@+id/categoriesFragment"
         android:name="infix.studios.wallpapers.categories.CategoriesFragment"
         android:label="Categories"
-        tools:layout="@layout/categories_fragment" />
+        tools:layout="@layout/categories_fragment" >
+        <action
+            android:id="@+id/action_categoriesFragment_to_categoryListFragment"
+            app:destination="@id/categoryListFragment" />
+    </fragment>
     <fragment
         android:id="@+id/searchFragment"
         android:name="infix.studios.wallpapers.search.SearchFragment"
         android:label="Search"
-        tools:layout="@layout/search_fragment" />
+        tools:layout="@layout/search_fragment" >
+        <action
+            android:id="@+id/action_searchFragment_to_searchDetailsFragment"
+            app:destination="@id/searchDetailsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/favoriteFragment"
         android:name="infix.studios.wallpapers.favorite.FavoriteFragment"
@@ -31,7 +39,7 @@
         tools:layout="@layout/favorite_fragment" />
     <fragment
         android:id="@+id/homeDetailsFragment"
-        android:name="infix.studios.wallpapers.homedetails.HomeDetailsFragment"
+        android:name="infix.studios.wallpapers.home.homedetails.HomeDetailsFragment"
         android:label="HomeDetailsFragment"
         tools:layout="@layout/home_details_fragment">
         <action
@@ -40,5 +48,44 @@
         <argument
             android:name="photoItem"
             app:argType="infix.studios.wallpapers.model.Photo$PhotoItem" />
+    </fragment>
+    <fragment
+        android:id="@+id/categoryListFragment"
+        android:name="infix.studios.wallpapers.categories.categorylist.CategoryListFragment"
+        android:label="category_list_fragment"
+        tools:layout="@layout/category_list_fragment" >
+        <action
+            android:id="@+id/action_categoryListFragment_to_categoriesFragment"
+            app:destination="@id/categoriesFragment" />
+        <argument
+            android:name="category"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_categoryListFragment_to_categoryListDetailsFragment"
+            app:destination="@id/categoryListDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/searchDetailsFragment"
+        android:name="infix.studios.wallpapers.search.searchdetails.SearchDetailsFragment"
+        android:label="search_details_fragment"
+        tools:layout="@layout/search_details_fragment" >
+        <action
+            android:id="@+id/action_searchDetailsFragment_to_searchFragment"
+            app:destination="@id/searchFragment" />
+        <argument
+            android:name="result"
+            app:argType="infix.studios.wallpapers.model.PhotoSearch$Result" />
+    </fragment>
+    <fragment
+        android:id="@+id/categoryListDetailsFragment"
+        android:name="infix.studios.wallpapers.categories.categorylistdetails.CategoryListDetailsFragment"
+        tools:layout="@layout/category_list_details_fragment"
+        android:label="CategoryListDetailsFragment" >
+        <action
+            android:id="@+id/action_categoryListDetailsFragment_to_categoryListFragment"
+            app:destination="@id/categoryListFragment" />
+        <argument
+            android:name="result"
+            app:argType="infix.studios.wallpapers.model.PhotoSearch$Result" />
     </fragment>
 </navigation>
