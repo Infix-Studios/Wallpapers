@@ -1,15 +1,15 @@
 package infix.studios.wallpapers.util
 
 import androidx.recyclerview.widget.DiffUtil
-import infix.studios.wallpapers.model.Photo
+import infix.studios.wallpapers.model.PhotoItem
 import infix.studios.wallpapers.model.PhotoSearch
 
-class DataDiffCallback: DiffUtil.ItemCallback<Photo.PhotoItem>() {
-    override fun areItemsTheSame(oldItem: Photo.PhotoItem, newItem: Photo.PhotoItem): Boolean {
+class DataDiffCallback: DiffUtil.ItemCallback<PhotoItem>() {
+    override fun areItemsTheSame(oldItem: PhotoItem, newItem: PhotoItem): Boolean {
         return oldItem == newItem
     }
 
-    override fun areContentsTheSame(oldItem: Photo.PhotoItem, newItem: Photo.PhotoItem): Boolean {
+    override fun areContentsTheSame(oldItem: PhotoItem, newItem: PhotoItem): Boolean {
         return oldItem == newItem
     }
 }

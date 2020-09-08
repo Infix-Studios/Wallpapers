@@ -13,7 +13,7 @@ import dagger.android.support.DaggerFragment
 import infix.studios.wallpapers.R
 import infix.studios.wallpapers.databinding.HomeFragmentBinding
 import infix.studios.wallpapers.di.ViewModelProviderFactory
-import infix.studios.wallpapers.model.Photo
+import infix.studios.wallpapers.model.PhotoItem
 import infix.studios.wallpapers.util.ClickListener
 import infix.studios.wallpapers.util.Resource
 import infix.studios.wallpapers.util.isNetworkAvailable
@@ -31,7 +31,7 @@ class HomeFragment : DaggerFragment() {
     private lateinit var adapter: HomeAdapter
 
 
-    private val observer = Observer<Resource<Photo>> {
+    private val observer = Observer<Resource<List<PhotoItem>>> {
         when (it.status) {
             Resource.Status.SUCCESS -> updateAdapter(it.data)
             Resource.Status.ERROR -> showError(it.message!!)
@@ -50,7 +50,7 @@ class HomeFragment : DaggerFragment() {
 
         adapter = HomeAdapter(ClickListener {
             this.findNavController().navigate(HomeFragmentDirections
-                .actionHomeFragmentToHomeDetailsFragment(it))
+                .actionHomeFragmentToHomeDetailsFragment(it.urls.regular))
         })
 
         binding.recyclerView.adapter = adapter
@@ -81,7 +81,7 @@ class HomeFragment : DaggerFragment() {
         }
     }
 
-    private fun updateAdapter(photo: Photo?) {
+    private fun updateAdapter(photo: List<PhotoItem>?) {
         binding.progressBar.visibility = View.GONE
         binding.recyclerView.visibility = View.VISIBLE
         adapter.submitList(photo)

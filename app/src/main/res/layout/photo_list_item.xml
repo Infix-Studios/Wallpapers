@@ -6,7 +6,7 @@
     <data>
         <variable
             name="photoItem"
-            type="infix.studios.wallpapers.model.Photo.PhotoItem" />
+            type="infix.studios.wallpapers.model.PhotoItem" />
 
         <variable
             name="clickListener"

@@ -20,13 +20,13 @@ class SearchAdapter(private val clickListener: ClickListenerSearch) :
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val data = getItem(position)
-        (holder as SearchViewHolder).bind(clickListener, data)
+        (holder as SearchViewHolder).bind(clickListener, data.urls.regular)
     }
 
     class SearchViewHolder(private val binding: PhotoSearchItemBinding):
             RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(listener: ClickListenerSearch, item: PhotoSearch.Result) {
+        fun bind(listener: ClickListenerSearch, item: String) {
             binding.apply {
                 clickListener = listener
                 result = item

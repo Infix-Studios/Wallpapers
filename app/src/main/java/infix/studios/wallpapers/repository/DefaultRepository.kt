@@ -1,7 +1,7 @@
 package infix.studios.wallpapers.repository
 
 import infix.studios.wallpapers.data.Service
-import infix.studios.wallpapers.model.Photo
+import infix.studios.wallpapers.model.PhotoItem
 import infix.studios.wallpapers.model.PhotoSearch
 import infix.studios.wallpapers.util.ACCESS_KEY
 import infix.studios.wallpapers.util.IMAGES_PER_PAGE
@@ -17,7 +17,7 @@ import javax.inject.Singleton
 class DefaultRepository @Inject constructor(val responseHandler: ResponseHandler,
                                             val service: Service) : Repository {
 
-    override suspend fun getPhotos(): Resource<Photo> {
+    override suspend fun getPhotos(): Resource<List<PhotoItem>> {
 
         try {
             val getPhotos = service.getPhotos(ACCESS_KEY, IMAGES_PER_PAGE)

@@ -4,296 +4,156 @@ package infix.studios.wallpapers.model
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
-import kotlinx.android.parcel.RawValue
 
-@Parcelize
 data class PhotoSearch(
-    val results: List<Result>,
-    val total: Int,
-    @SerializedName("total_pages")
-    val totalPages: Int
-): Parcelable {
-    @Parcelize
-    data class Result(
-            @SerializedName("alt_description")
-        val altDescription: String,
-            val categories: @RawValue List<Any>,
-            val color: String,
-            @SerializedName("created_at")
-        val createdAt: String,
-            @SerializedName("current_user_collections")
-        val currentUserCollections: @RawValue List<Any>,
-            val description:@RawValue Any,
-            val height: Int,
-            val id: String,
-            @SerializedName("liked_by_user")
-        val likedByUser: Boolean,
-            val likes: Int,
-            val links: Links,
-            @SerializedName("promoted_at")
-        val promotedAt: @RawValue Any,
-            val sponsorship: Sponsorship,
-            val tags: List<Tag>,
-            @SerializedName("updated_at")
-        val updatedAt: String,
-            val urls: Urls,
-            val user: User,
-            val width: Int
-    ) : Parcelable {
-        @Parcelize
-        data class Links(
-            val download: String,
-            @SerializedName("download_location")
-            val downloadLocation: String,
-            val html: String,
-            val self: String
-        ): Parcelable
+    @SerializedName("total") val total : Int,
+    @SerializedName("total_pages") val total_pages : Int,
+    @SerializedName("results") val results : List<Result>
+) {
+    data class Result (
+        @SerializedName("id") val id : String,
+        @SerializedName("created_at") val created_at : String,
+        @SerializedName("updated_at") val updated_at : String,
+        @SerializedName("promoted_at") val promoted_at : String,
+        @SerializedName("width") val width : Int,
+        @SerializedName("height") val height : Int,
+        @SerializedName("color") val color : String,
+        @SerializedName("description") val description : String,
+        @SerializedName("alt_description") val alt_description : String,
+        @SerializedName("urls") val urls : Urls,
+        @SerializedName("links") val links : Links,
+        @SerializedName("categories") val categories : List<String>,
+        @SerializedName("likes") val likes : Int,
+        @SerializedName("liked_by_user") val liked_by_user : Boolean,
+        @SerializedName("current_user_collections") val current_user_collections : List<String>,
+        @SerializedName("sponsorship") val sponsorship : Sponsorship,
+        @SerializedName("user") val user : User,
+        @SerializedName("tags") val tags : List<Tags>
+    )
+    data class User (
+        @SerializedName("id") val id : String,
+        @SerializedName("updated_at") val updated_at : String,
+        @SerializedName("username") val username : String,
+        @SerializedName("name") val name : String,
+        @SerializedName("first_name") val first_name : String,
+        @SerializedName("last_name") val last_name : String,
+        @SerializedName("twitter_username") val twitter_username : String,
+        @SerializedName("portfolio_url") val portfolio_url : String,
+        @SerializedName("bio") val bio : String,
+        @SerializedName("location") val location : String,
+        @SerializedName("links") val links : Links,
+        @SerializedName("profile_image") val profile_image : Profile_image,
+        @SerializedName("instagram_username") val instagram_username : String,
+        @SerializedName("total_collections") val total_collections : Int,
+        @SerializedName("total_likes") val total_likes : Int,
+        @SerializedName("total_photos") val total_photos : Int,
+        @SerializedName("accepted_tos") val accepted_tos : Boolean
+    )
+    data class Urls (
+        @SerializedName("raw") val raw : String,
+        @SerializedName("full") val full : String,
+        @SerializedName("regular") val regular : String,
+        @SerializedName("small") val small : String,
+        @SerializedName("thumb") val thumb : String
+    )
+    data class Type (
 
-        @Parcelize
-        data class Sponsorship(
-            @SerializedName("impression_urls")
-            val impressionUrls: List<String>,
-            val sponsor:@RawValue Sponsor,
-            val tagline: String,
-            @SerializedName("tagline_url")
-            val taglineUrl: String
-        ): Parcelable {
-            data class Sponsor(
-                @SerializedName("accepted_tos")
-                val acceptedTos: Boolean,
-                val bio: String,
-                @SerializedName("first_name")
-                val firstName: String,
-                val id: String,
-                @SerializedName("instagram_username")
-                val instagramUsername: String,
-                @SerializedName("last_name")
-                val lastName: Any,
-                val links: Links,
-                val location: Any,
-                val name: String,
-                @SerializedName("portfolio_url")
-                val portfolioUrl: String,
-                @SerializedName("profile_image")
-                val profileImage: ProfileImage,
-                @SerializedName("total_collections")
-                val totalCollections: Int,
-                @SerializedName("total_likes")
-                val totalLikes: Int,
-                @SerializedName("total_photos")
-                val totalPhotos: Int,
-                @SerializedName("twitter_username")
-                val twitterUsername: String,
-                @SerializedName("updated_at")
-                val updatedAt: String,
-                val username: String
-            ) {
-                data class Links(
-                    val followers: String,
-                    val following: String,
-                    val html: String,
-                    val likes: String,
-                    val photos: String,
-                    val portfolio: String,
-                    val self: String
-                )
+        @SerializedName("slug") val slug : String,
+        @SerializedName("pretty_slug") val pretty_slug : String
+    )
+    data class Tags (
 
-                data class ProfileImage(
-                    val large: String,
-                    val medium: String,
-                    val small: String
-                )
-            }
-        }
+        @SerializedName("type") val type : String,
+        @SerializedName("title") val title : String,
+        @SerializedName("source") val source : Source
+    )
+    data class Subcategory (
 
-        @Parcelize
-        data class Tag(
-            val source: @RawValue Source,
-            val title: String,
-            val type: String
-        ): Parcelable {
-            data class Source(
-                val ancestry: Ancestry,
-                @SerializedName("cover_photo")
-                val coverPhoto: CoverPhoto,
-                val description: String,
-                @SerializedName("meta_description")
-                val metaDescription: String,
-                @SerializedName("meta_title")
-                val metaTitle: String,
-                val subtitle: String,
-                val title: String
-            ) {
-                data class Ancestry(
-                    val category: Category,
-                    val subcategory: Subcategory,
-                    val type: Type
-                ) {
-                    data class Category(
-                        @SerializedName("pretty_slug")
-                        val prettySlug: String,
-                        val slug: String
-                    )
+        @SerializedName("slug") val slug : String,
+        @SerializedName("pretty_slug") val pretty_slug : String
+    )
+    data class Sponsorship (
 
-                    data class Subcategory(
-                        @SerializedName("pretty_slug")
-                        val prettySlug: String,
-                        val slug: String
-                    )
+        @SerializedName("impression_urls") val impression_urls : List<String>,
+        @SerializedName("tagline") val tagline : String,
+        @SerializedName("tagline_url") val tagline_url : String,
+        @SerializedName("sponsor") val sponsor : Sponsor
+    )
+    data class Sponsor (
 
-                    data class Type(
-                        @SerializedName("pretty_slug")
-                        val prettySlug: String,
-                        val slug: String
-                    )
-                }
+        @SerializedName("id") val id : String,
+        @SerializedName("updated_at") val updated_at : String,
+        @SerializedName("username") val username : String,
+        @SerializedName("name") val name : String,
+        @SerializedName("first_name") val first_name : String,
+        @SerializedName("last_name") val last_name : String,
+        @SerializedName("twitter_username") val twitter_username : String,
+        @SerializedName("portfolio_url") val portfolio_url : String,
+        @SerializedName("bio") val bio : String,
+        @SerializedName("location") val location : String,
+        @SerializedName("links") val links : Links,
+        @SerializedName("profile_image") val profile_image : Profile_image,
+        @SerializedName("instagram_username") val instagram_username : String,
+        @SerializedName("total_collections") val total_collections : Int,
+        @SerializedName("total_likes") val total_likes : Int,
+        @SerializedName("total_photos") val total_photos : Int,
+        @SerializedName("accepted_tos") val accepted_tos : Boolean
+    )
+    data class Source (
 
-                data class CoverPhoto(
-                    @SerializedName("alt_description")
-                    val altDescription: String,
-                    val categories: List<Any>,
-                    val color: String,
-                    @SerializedName("created_at")
-                    val createdAt: String,
-                    @SerializedName("current_user_collections")
-                    val currentUserCollections: List<Any>,
-                    val description: Any,
-                    val height: Int,
-                    val id: String,
-                    @SerializedName("liked_by_user")
-                    val likedByUser: Boolean,
-                    val likes: Int,
-                    val links: Links,
-                    @SerializedName("promoted_at")
-                    val promotedAt: String,
-                    val sponsorship: Any,
-                    @SerializedName("updated_at")
-                    val updatedAt: String,
-                    val urls: Urls,
-                    val user: User,
-                    val width: Int
-                ) {
-                    data class Links(
-                        val download: String,
-                        @SerializedName("download_location")
-                        val downloadLocation: String,
-                        val html: String,
-                        val self: String
-                    )
+        @SerializedName("ancestry") val ancestry : Ancestry,
+        @SerializedName("title") val title : String,
+        @SerializedName("subtitle") val subtitle : String,
+        @SerializedName("description") val description : String,
+        @SerializedName("meta_title") val meta_title : String,
+        @SerializedName("meta_description") val meta_description : String,
+        @SerializedName("cover_photo") val cover_photo : Cover_photo
+    )
+    data class Profile_image (
 
-                    data class Urls(
-                        val full: String,
-                        val raw: String,
-                        val regular: String,
-                        val small: String,
-                        val thumb: String
-                    )
+        @SerializedName("small") val small : String,
+        @SerializedName("medium") val medium : String,
+        @SerializedName("large") val large : String
+    )
+    data class Links (
 
-                    data class User(
-                        @SerializedName("accepted_tos")
-                        val acceptedTos: Boolean,
-                        val bio: String,
-                        @SerializedName("first_name")
-                        val firstName: String,
-                        val id: String,
-                        @SerializedName("instagram_username")
-                        val instagramUsername: String,
-                        @SerializedName("last_name")
-                        val lastName: String,
-                        val links: Links,
-                        val location: String,
-                        val name: String,
-                        @SerializedName("portfolio_url")
-                        val portfolioUrl: String,
-                        @SerializedName("profile_image")
-                        val profileImage: ProfileImage,
-                        @SerializedName("total_collections")
-                        val totalCollections: Int,
-                        @SerializedName("total_likes")
-                        val totalLikes: Int,
-                        @SerializedName("total_photos")
-                        val totalPhotos: Int,
-                        @SerializedName("twitter_username")
-                        val twitterUsername: String,
-                        @SerializedName("updated_at")
-                        val updatedAt: String,
-                        val username: String
-                    ) {
-                        data class Links(
-                            val followers: String,
-                            val following: String,
-                            val html: String,
-                            val likes: String,
-                            val photos: String,
-                            val portfolio: String,
-                            val self: String
-                        )
+        @SerializedName("self") val self : String,
+        @SerializedName("html") val html : String,
+        @SerializedName("photos") val photos : String,
+        @SerializedName("likes") val likes : String,
+        @SerializedName("portfolio") val portfolio : String,
+        @SerializedName("following") val following : String,
+        @SerializedName("followers") val followers : String
+    )
+    data class Cover_photo (
 
-                        data class ProfileImage(
-                            val large: String,
-                            val medium: String,
-                            val small: String
-                        )
-                    }
-                }
-            }
-        }
+        @SerializedName("id") val id : String,
+        @SerializedName("created_at") val created_at : String,
+        @SerializedName("updated_at") val updated_at : String,
+        @SerializedName("promoted_at") val promoted_at : String,
+        @SerializedName("width") val width : Int,
+        @SerializedName("height") val height : Int,
+        @SerializedName("color") val color : String,
+        @SerializedName("description") val description : String,
+        @SerializedName("alt_description") val alt_description : String,
+        @SerializedName("urls") val urls : Urls,
+        @SerializedName("links") val links : Links,
+        @SerializedName("categories") val categories : List<String>,
+        @SerializedName("likes") val likes : Int,
+        @SerializedName("liked_by_user") val liked_by_user : Boolean,
+        @SerializedName("current_user_collections") val current_user_collections : List<String>,
+        @SerializedName("sponsorship") val sponsorship : String,
+        @SerializedName("user") val user : User
+    )
+    data class Category (
 
-        @Parcelize
-        data class Urls(
-            val full: String,
-            val raw: String,
-            val regular: String,
-            val small: String,
-            val thumb: String
-        ): Parcelable
+        @SerializedName("slug") val slug : String,
+        @SerializedName("pretty_slug") val pretty_slug : String
+    )
+    data class Ancestry (
 
-        @Parcelize
-        data class User(
-            @SerializedName("accepted_tos")
-            val acceptedTos: Boolean,
-            val bio: String,
-            @SerializedName("first_name")
-            val firstName: String,
-            val id: String,
-            @SerializedName("instagram_username")
-            val instagramUsername: String,
-            @SerializedName("last_name")
-            val lastName: @RawValue Any,
-            val links: @RawValue Links,
-            val location: @RawValue Any,
-            val name: String,
-            @SerializedName("portfolio_url")
-            val portfolioUrl: String,
-            @SerializedName("profile_image")
-            val profileImage: @RawValue ProfileImage,
-            @SerializedName("total_collections")
-            val totalCollections: Int,
-            @SerializedName("total_likes")
-            val totalLikes: Int,
-            @SerializedName("total_photos")
-            val totalPhotos: Int,
-            @SerializedName("twitter_username")
-            val twitterUsername: String,
-            @SerializedName("updated_at")
-            val updatedAt: String,
-            val username: String
-        ): Parcelable {
-            data class Links(
-                val followers: String,
-                val following: String,
-                val html: String,
-                val likes: String,
-                val photos: String,
-                val portfolio: String,
-                val self: String
-            )
-
-            data class ProfileImage(
-                val large: String,
-                val medium: String,
-                val small: String
-            )
-        }
-    }
+        @SerializedName("type") val type : Type,
+        @SerializedName("category") val category : Category,
+        @SerializedName("subcategory") val subcategory : Subcategory
+    )
 }

@@ -6,7 +6,7 @@
     <data>
         <variable
             name="result"
-            type="infix.studios.wallpapers.model.PhotoSearch.Result" />
+            type="String" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -23,7 +23,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:photoUrl="@{result.Urls.regular}"
+            app:photoUrl="@{result}"
             tools:src="@tools:sample/backgrounds/scenic" />
 
         <Button

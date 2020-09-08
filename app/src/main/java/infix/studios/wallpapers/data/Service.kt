@@ -1,6 +1,6 @@
 package infix.studios.wallpapers.data
 
-import infix.studios.wallpapers.model.Photo
+import infix.studios.wallpapers.model.PhotoItem
 import infix.studios.wallpapers.model.PhotoSearch
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -11,7 +11,7 @@ interface Service {
     suspend fun getPhotos(
         @Query("client_id") client_id: String,
         @Query("per_page") per_page: Int
-    ): Photo
+    ): List<PhotoItem>
 
     @GET("/search/photos/")
     suspend fun searchPhotos(

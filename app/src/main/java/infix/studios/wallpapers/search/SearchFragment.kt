@@ -12,7 +12,6 @@ import dagger.android.support.DaggerFragment
 import infix.studios.wallpapers.R
 import infix.studios.wallpapers.databinding.SearchFragmentBinding
 import infix.studios.wallpapers.di.ViewModelProviderFactory
-import infix.studios.wallpapers.model.Photo
 import infix.studios.wallpapers.model.PhotoSearch
 import infix.studios.wallpapers.util.*
 import kotlinx.android.synthetic.main.empty.view.*
