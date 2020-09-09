@@ -50,10 +50,11 @@ class FavoriteFragment : DaggerFragment() {
             this.findNavController().navigate(FavoriteFragmentDirections
                 .actionFavoriteFragmentToFavoriteDetailsFragment(it))
         })
+        binding.lifecycleOwner = this.viewLifecycleOwner
 
         binding.recyclerView.adapter = adapter
 
-        viewModel.getFavoritePhotos.observe(viewLifecycleOwner, observer)
+        viewModel.favorites.observe(viewLifecycleOwner, observer)
 
         return binding.root
     }

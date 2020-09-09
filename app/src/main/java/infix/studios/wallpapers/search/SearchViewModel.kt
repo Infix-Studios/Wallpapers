@@ -5,8 +5,7 @@ import androidx.lifecycle.liveData
 import infix.studios.wallpapers.repository.DefaultRepository
 import infix.studios.wallpapers.util.Resource
 import kotlinx.coroutines.Dispatchers
-import timber.log.Timber
-import javax.inject.Inject
+    import javax.inject.Inject
 
 class SearchViewModel @Inject constructor(private val repository: DefaultRepository) : ViewModel() {
     fun searchPhotos(query: String) = liveData(Dispatchers.IO) {

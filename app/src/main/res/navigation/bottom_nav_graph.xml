@@ -44,7 +44,7 @@
     <fragment
         android:id="@+id/homeDetailsFragment"
         android:name="infix.studios.wallpapers.home.homedetails.HomeDetailsFragment"
-        android:label="HomeDetailsFragment"
+        android:label="Image"
         tools:layout="@layout/home_details_fragment">
         <action
             android:id="@+id/action_homeDetailsFragment_to_homeFragment"
@@ -56,8 +56,8 @@
     <fragment
         android:id="@+id/categoryListFragment"
         android:name="infix.studios.wallpapers.categories.categorylist.CategoryListFragment"
-        android:label="category_list_fragment"
-        tools:layout="@layout/category_list_fragment" >
+        android:label="{category}"
+        tools:layout="@layout/category_list_fragment">
         <action
             android:id="@+id/action_categoryListFragment_to_categoriesFragment"
             app:destination="@id/categoriesFragment" />
@@ -71,8 +71,8 @@
     <fragment
         android:id="@+id/searchDetailsFragment"
         android:name="infix.studios.wallpapers.search.searchdetails.SearchDetailsFragment"
-        android:label="search_details_fragment"
-        tools:layout="@layout/search_details_fragment" >
+        android:label="Image"
+        tools:layout="@layout/search_details_fragment">
         <action
             android:id="@+id/action_searchDetailsFragment_to_searchFragment"
             app:destination="@id/searchFragment" />
@@ -83,8 +83,8 @@
     <fragment
         android:id="@+id/categoryListDetailsFragment"
         android:name="infix.studios.wallpapers.categories.categorylistdetails.CategoryListDetailsFragment"
-        tools:layout="@layout/category_list_details_fragment"
-        android:label="CategoryListDetailsFragment" >
+        android:label="Image"
+        tools:layout="@layout/category_list_details_fragment">
         <action
             android:id="@+id/action_categoryListDetailsFragment_to_categoryListFragment"
             app:destination="@id/categoryListFragment" />
@@ -95,7 +95,7 @@
     <fragment
         android:id="@+id/favoriteDetailsFragment"
         android:name="infix.studios.wallpapers.favorite.favoritedetails.FavoriteDetailsFragment"
-        android:label="FavoriteDetailsFragment" >
+        android:label="Image">
         <action
             android:id="@+id/action_favoriteDetailsFragment_to_favoriteFragment"
             app:destination="@id/favoriteFragment" />
