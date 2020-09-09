@@ -3,10 +3,10 @@ package infix.studios.wallpapers.categories.categorylistdetails
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.Toast
+import androidx.appcompat.content.res.AppCompatResources
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
@@ -15,6 +15,7 @@ import infix.studios.wallpapers.MainActivity
 import infix.studios.wallpapers.R
 import infix.studios.wallpapers.databinding.CategoryListDetailsFragmentBinding
 import infix.studios.wallpapers.di.ViewModelProviderFactory
+import infix.studios.wallpapers.model.FavoritePhoto
 import infix.studios.wallpapers.util.getLocalBitmapUri
 import infix.studios.wallpapers.util.setWallpaperDialog
 import timber.log.Timber
@@ -29,6 +30,7 @@ class CategoryListDetailsFragment : DaggerFragment() {
     private lateinit var binding: CategoryListDetailsFragmentBinding
     private lateinit var viewModel: CategoryListDetailsViewModel
     private val args: CategoryListDetailsFragmentArgs by navArgs()
+    private lateinit var currentMenuIcon: MenuItem
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -71,7 +73,39 @@ class CategoryListDetailsFragment : DaggerFragment() {
             }
         }
 
+        setHasOptionsMenu(true)
+
         return binding.root
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.add_favorite_menu, menu)
+        currentMenuIcon = menu.findItem(R.id.favorite_menu_icon)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId) {
+            R.id.favorite_menu_icon -> {
+                if (currentMenuIcon.icon.constantState?.equals(
+                        ContextCompat.getDrawable(requireContext(),
+                            R.drawable.ic_unliked_favorite_24)?.constantState)!!) {
+
+                    Toast.makeText(context, "Added to favorite", Toast.LENGTH_SHORT).show()
+                    viewModel.saveFavoritePhoto(FavoritePhoto(url = args.url))
+                    currentMenuIcon.icon = AppCompatResources.getDrawable(
+                        requireContext(),
+                        R.drawable.ic_white_favorite_24
+                    )
+                } else {
+                    //Toast.makeText(context, "Removed to favorite", Toast.LENGTH_SHORT).show()
+                    currentMenuIcon.icon = AppCompatResources.getDrawable(
+                        requireContext(),
+                        R.drawable.ic_unliked_favorite_24
+                    )
+                }
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     override fun onAttach(context: Context) {

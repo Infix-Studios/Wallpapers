@@ -36,7 +36,11 @@
         android:id="@+id/favoriteFragment"
         android:name="infix.studios.wallpapers.favorite.FavoriteFragment"
         android:label="Favorite"
-        tools:layout="@layout/favorite_fragment" />
+        tools:layout="@layout/favorite_fragment" >
+        <action
+            android:id="@+id/action_favoriteFragment_to_favoriteDetailsFragment"
+            app:destination="@id/favoriteDetailsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/homeDetailsFragment"
         android:name="infix.studios.wallpapers.home.homedetails.HomeDetailsFragment"
@@ -84,6 +88,17 @@
         <action
             android:id="@+id/action_categoryListDetailsFragment_to_categoryListFragment"
             app:destination="@id/categoryListFragment" />
+        <argument
+            android:name="url"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/favoriteDetailsFragment"
+        android:name="infix.studios.wallpapers.favorite.favoritedetails.FavoriteDetailsFragment"
+        android:label="FavoriteDetailsFragment" >
+        <action
+            android:id="@+id/action_favoriteDetailsFragment_to_favoriteFragment"
+            app:destination="@id/favoriteFragment" />
         <argument
             android:name="url"
             app:argType="string" />

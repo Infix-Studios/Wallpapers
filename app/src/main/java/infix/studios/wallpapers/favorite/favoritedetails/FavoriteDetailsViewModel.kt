@@ -1,17 +1,16 @@
-package infix.studios.wallpapers.categories.categorylistdetails
+package infix.studios.wallpapers.favorite.favoritedetails
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import infix.studios.wallpapers.model.FavoritePhoto
-import infix.studios.wallpapers.model.PhotoSearch
 import infix.studios.wallpapers.repository.DefaultRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class CategoryListDetailsViewModel @Inject constructor(private val repository: DefaultRepository) : ViewModel() {
+class FavoriteDetailsViewModel @Inject constructor(private val repository: DefaultRepository): ViewModel() {
     private val _photo = MutableLiveData<String>()
     val photo: LiveData<String> = _photo
 
@@ -19,9 +18,9 @@ class CategoryListDetailsViewModel @Inject constructor(private val repository: D
         _photo.value = photo
     }
 
-    fun saveFavoritePhoto(favoritePhoto: FavoritePhoto) {
+    fun deleteFavoritePhoto(url: String) {
         viewModelScope.launch(Dispatchers.IO) {
-            repository.saveFavoritePhoto(favoritePhoto)
+            repository.deleteFavoritePhoto(url)
         }
     }
 }

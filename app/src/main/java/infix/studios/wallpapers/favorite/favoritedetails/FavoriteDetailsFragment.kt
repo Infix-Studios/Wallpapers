@@ -1,51 +1,45 @@
-package infix.studios.wallpapers.home.homedetails
+package infix.studios.wallpapers.favorite.favoritedetails
 
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.*
 import android.widget.Toast
-import androidx.appcompat.content.res.AppCompatResources
-import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import dagger.android.support.DaggerFragment
 import infix.studios.wallpapers.MainActivity
 import infix.studios.wallpapers.R
-import infix.studios.wallpapers.databinding.HomeDetailsFragmentBinding
+import infix.studios.wallpapers.databinding.FavoriteDetailsFragmentBinding
 import infix.studios.wallpapers.di.ViewModelProviderFactory
-import infix.studios.wallpapers.model.FavoritePhoto
 import infix.studios.wallpapers.util.getLocalBitmapUri
 import infix.studios.wallpapers.util.setWallpaperDialog
 import timber.log.Timber
 import javax.inject.Inject
 
-class HomeDetailsFragment : DaggerFragment() {
+class FavoriteDetailsFragment : DaggerFragment() {
 
     @Inject
     lateinit var factory: ViewModelProviderFactory
-
-    private lateinit var viewModel: HomeDetailsViewModel
-    private lateinit var binding: HomeDetailsFragmentBinding
-    private val args: HomeDetailsFragmentArgs by navArgs()
-    private lateinit var currentMenuIcon: MenuItem
+    private lateinit var viewModel: FavoriteDetailsViewModel
+    private lateinit var binding: FavoriteDetailsFragmentBinding
+    private val args: FavoriteDetailsFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = DataBindingUtil.inflate(inflater, R.layout.home_details_fragment, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.favorite_details_fragment, container, false)
 
-        viewModel = ViewModelProvider(this, factory).get(HomeDetailsViewModel::class.java)
-
-        viewModel.photo.observe(viewLifecycleOwner, Observer {
-            binding.photoItem =  it
-        })
+        viewModel = ViewModelProvider(this, factory).get(FavoriteDetailsViewModel::class.java)
 
         viewModel.setPhoto(args.url)
 
+        viewModel.photo.observe(viewLifecycleOwner, {
+            binding.result = it
+        })
         binding.setWallpaperButton.setOnClickListener { setWallpaperDialog(requireContext(), args.url) }
 
         binding.shareButton.setOnClickListener {
@@ -69,32 +63,17 @@ class HomeDetailsFragment : DaggerFragment() {
 
         return binding.root
     }
-
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.add_favorite_menu, menu)
-        currentMenuIcon = menu.findItem(R.id.favorite_menu_icon)
+        inflater.inflate(R.menu.delete_favorite_menu, menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId) {
-            R.id.favorite_menu_icon -> {
-                if (currentMenuIcon.icon.constantState?.equals(
-                        ContextCompat.getDrawable(requireContext(),
-                            R.drawable.ic_unliked_favorite_24)?.constantState)!!) {
-
-                    Toast.makeText(context, "Added to favorite", Toast.LENGTH_SHORT).show()
-                    viewModel.saveFavoritePhoto(FavoritePhoto(url = args.url))
-                    currentMenuIcon.icon = AppCompatResources.getDrawable(
-                        requireContext(),
-                        R.drawable.ic_white_favorite_24
-                    )
-                } else {
-                    //Toast.makeText(context, "Removed to favorite", Toast.LENGTH_SHORT).show()
-                    currentMenuIcon.icon = AppCompatResources.getDrawable(
-                        requireContext(),
-                        R.drawable.ic_unliked_favorite_24
-                    )
-                }
+            R.id.delete_favorite_icon -> {
+                viewModel.deleteFavoritePhoto(args.url)
+                this.findNavController().navigate(FavoriteDetailsFragmentDirections
+                    .actionFavoriteDetailsFragmentToFavoriteFragment())
+                (activity as MainActivity).showBottomNavigation()
             }
         }
         return super.onOptionsItemSelected(item)

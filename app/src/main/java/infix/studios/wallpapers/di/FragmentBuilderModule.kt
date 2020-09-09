@@ -14,6 +14,7 @@ import infix.studios.wallpapers.di.homedetails.HomeDetailsViewModelModule
 import infix.studios.wallpapers.di.search.SearchViewModelModule
 import infix.studios.wallpapers.di.searchdetails.SearchDetailsViewModelModule
 import infix.studios.wallpapers.favorite.FavoriteFragment
+import infix.studios.wallpapers.favorite.favoritedetails.FavoriteDetailsFragment
 import infix.studios.wallpapers.home.HomeFragment
 import infix.studios.wallpapers.home.homedetails.HomeDetailsFragment
 import infix.studios.wallpapers.search.SearchFragment
@@ -27,6 +28,9 @@ abstract class FragmentBuilderModule {
 
     @ContributesAndroidInjector(modules = [FavoriteViewModelModule::class])
     abstract fun contributeFavoriteFragment() : FavoriteFragment
+
+    @ContributesAndroidInjector(modules = [FavoriteDetailsViewModelModule::class])
+    abstract fun contributeFavoriteDetailsFragment() : FavoriteDetailsFragment
 
     @ContributesAndroidInjector(modules = [HomeViewModelModule::class])
     abstract fun contributeHomeFragment() : HomeFragment
@@ -45,4 +49,5 @@ abstract class FragmentBuilderModule {
 
     @ContributesAndroidInjector(modules = [CategoryListDetailsViewModelModule::class])
     abstract fun contributeCategoryListDetailsFragment() : CategoryListDetailsFragment
+
 }

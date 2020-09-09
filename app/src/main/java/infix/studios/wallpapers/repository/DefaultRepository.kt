@@ -1,6 +1,8 @@
 package infix.studios.wallpapers.repository
 
 import infix.studios.wallpapers.data.Service
+import infix.studios.wallpapers.model.FavoritePhoto
+import infix.studios.wallpapers.data.local.FavoritePhotoDao
 import infix.studios.wallpapers.model.PhotoItem
 import infix.studios.wallpapers.model.PhotoSearch
 import infix.studios.wallpapers.util.ACCESS_KEY
@@ -15,7 +17,8 @@ import javax.inject.Singleton
 
 @Singleton
 class DefaultRepository @Inject constructor(val responseHandler: ResponseHandler,
-                                            val service: Service) : Repository {
+                                            val service: Service,
+                                            val favoritePhotoDao: FavoritePhotoDao) : Repository {
 
     override suspend fun getPhotos(): Resource<List<PhotoItem>> {
 
@@ -58,6 +61,34 @@ class DefaultRepository @Inject constructor(val responseHandler: ResponseHandler
                 else -> Resource.error("Connection Failed", null)
             }
         }
+    }
+
+    override suspend fun getFavoritePhotos() : Resource<List<FavoritePhoto>> {
+        try {
+            //Timber.i("\n\n**************\nRepository Search: ${getPhotos}")
+            return responseHandler.handleSuccess(favoritePhotoDao.getPhotosUri())
+
+        } catch(ex:Exception) {
+            Timber.i("\n\n**************\nRepository Search error: $ex")
+            return when(ex) {
+                is HttpException -> {
+                    responseHandler.handleException((ex as HttpException).code())
+                }
+                is SocketTimeoutException -> {
+                    // handle
+                    Resource.error("Connection failed", null)
+                }
+                else -> Resource.error("Connection Failed", null)
+            }
+        }
+    }
+
+    override suspend fun saveFavoritePhoto(favoritePhoto: FavoritePhoto) {
+        favoritePhotoDao.savePhotoUri(favoritePhoto)
+    }
+
+    override suspend fun deleteFavoritePhoto(url: String) {
+        favoritePhotoDao.deletePhotoByUrl(url)
     }
 
 }
