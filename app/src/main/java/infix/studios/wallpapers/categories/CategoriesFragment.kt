@@ -29,7 +29,7 @@ class CategoriesFragment : DaggerFragment() {
 
         viewModel = ViewModelProvider(this, factory).get(CategoriesViewModel::class.java)
 
-        binding.animalsCategoryButton.setOnClickListener { moveToCategoryList("nature") }
+        binding.animalsCategoryButton.setOnClickListener { moveToCategoryList("animal") }
 
         binding.architectureCategoryButton.setOnClickListener { moveToCategoryList("architecture") }
 

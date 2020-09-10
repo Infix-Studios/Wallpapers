@@ -28,7 +28,7 @@
             android:visibility="gone"/>
 
         <LinearLayout
-            android:visibility="@{viewmodel.empty ? View.GONE : View.VISIBLE}"
+            android:visibility="@{viewmodel.empty ? View.VISIBLE : View.GONE}"
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -39,6 +39,7 @@
             android:layout_height="wrap_content">
 
             <ImageView
+                android:visibility="@{viewmodel.empty ? View.VISIBLE : View.GONE}"
                 android:id="@+id/no_favorites_icon"
                 android:layout_width="150dp"
                 android:layout_height="166dp"

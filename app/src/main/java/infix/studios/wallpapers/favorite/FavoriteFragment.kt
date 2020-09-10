@@ -44,13 +44,16 @@ class FavoriteFragment : DaggerFragment() {
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.favorite_fragment, container, false)
 
+        binding.lifecycleOwner = this.viewLifecycleOwner
+
         viewModel = ViewModelProvider(this, factory).get(FavoriteViewModel::class.java)
+
+        binding.viewmodel = viewModel
 
         adapter = FavoriteAdapter(ClickListenerSearch {
             this.findNavController().navigate(FavoriteFragmentDirections
                 .actionFavoriteFragmentToFavoriteDetailsFragment(it))
         })
-        binding.lifecycleOwner = this.viewLifecycleOwner
 
         binding.recyclerView.adapter = adapter
 
