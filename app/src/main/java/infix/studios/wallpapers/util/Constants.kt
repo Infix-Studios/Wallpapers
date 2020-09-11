@@ -6,3 +6,5 @@ const val SECRET_KEY = "VP5cuw72u_QdiMtTRt2qeijDrbOAD8cIzNA5xxaBs0A"
 const val BASE_URL = "https://api.unsplash.com/"
 const val IMAGES_PER_PAGE = 20
 const val DATABASE_NAME = "favorite_photo_db"
+const val ADDRESS = "infixstudios2021@gmail.com"
+const val SUBJECT = "Reporting wallpaper app problem"

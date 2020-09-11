@@ -8,6 +8,8 @@ import kotlinx.coroutines.Dispatchers
     import javax.inject.Inject
 
 class SearchViewModel @Inject constructor(private val repository: DefaultRepository) : ViewModel() {
+
+
     fun searchPhotos(query: String) = liveData(Dispatchers.IO) {
         emit(Resource.loading(null))
         val getPhotosList = repository.searchPhotos(query)

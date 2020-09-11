@@ -33,7 +33,10 @@ class SearchFragment : DaggerFragment() {
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.search_fragment, container, false)
 
+        binding.lifecycleOwner = this.viewLifecycleOwner
+
         viewModel = ViewModelProvider(this, factory).get(SearchViewModel::class.java)
+
 
         adapter = SearchAdapter(ClickListenerSearch {
             this.findNavController().navigate(
