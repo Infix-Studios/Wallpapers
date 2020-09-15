@@ -20,6 +20,8 @@ import javax.inject.Inject
 
 class SearchFragment : DaggerFragment() {
 
+    private var currentWordToBeSearched: String? = null
+
     @Inject
     lateinit var factory: ViewModelProviderFactory
 
@@ -36,7 +38,6 @@ class SearchFragment : DaggerFragment() {
         binding.lifecycleOwner = this.viewLifecycleOwner
 
         viewModel = ViewModelProvider(this, factory).get(SearchViewModel::class.java)
-
 
         adapter = SearchAdapter(ClickListenerSearch {
             this.findNavController().navigate(
@@ -60,7 +61,13 @@ class SearchFragment : DaggerFragment() {
         searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(p0: String?): Boolean {
                 if (p0 != null) {
+                    displayWallpapersAndHideNoWallpapersText()
+                    currentWordToBeSearched = p0
                     searchWallpapers(p0)
+                } else {
+                    binding.noWallpapersText.visibility = View.VISIBLE
+                    binding.recyclerView.visibility = View.GONE
+                    binding.progressBar.visibility = View.GONE
                 }
                 return true
             }
@@ -123,5 +130,19 @@ class SearchFragment : DaggerFragment() {
         if (!isNetworkAvailable(context)){
             showError("No internet")
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (currentWordToBeSearched != null){
+            displayWallpapersAndHideNoWallpapersText()
+            searchWallpapers(currentWordToBeSearched!!)
+        }
+    }
+
+    private fun displayWallpapersAndHideNoWallpapersText() {
+        binding.noWallpapersText.visibility = View.GONE
+        binding.recyclerView.visibility = View.VISIBLE
+        binding.progressBar.visibility = View.VISIBLE
     }
 }

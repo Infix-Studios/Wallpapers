@@ -30,4 +30,5 @@
     <string name="contact_us">Contact us</string>
     <string name="about_us_description">We are a small studio specialized in software development, we love building advanced native android apps, this is our main specialization, we follows the best practises. You can learn more about us at: infix.studios web page.</string>
     <string name="navigation_drawer_header_logo">navigation drawer header logo representing infix studios</string>
+    <string name="search_wallpapers">Search Wallpapers</string>
 </resources>
