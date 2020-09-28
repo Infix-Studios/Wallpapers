@@ -14,6 +14,7 @@ import android.os.Environment
 import android.util.DisplayMetrics
 import android.view.WindowManager
 import android.widget.ImageView
+import androidx.core.content.FileProvider
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import infix.studios.wallpapers.BaseApplication
 import kotlinx.coroutines.Dispatchers
@@ -183,7 +184,8 @@ fun setWallpaperBoth(urlPath: String) {
 fun getLocalBitmapUri(imageView: ImageView, context: Context): Uri? {
     // Extract Bitmap from ImageView drawable
     val drawable: Drawable = imageView.drawable
-    var bmp: Bitmap? = null
+    var bmp: Bitmap?
+
     bmp = if (drawable is BitmapDrawable) {
         (imageView.drawable as BitmapDrawable).bitmap
     } else {
@@ -196,7 +198,8 @@ fun getLocalBitmapUri(imageView: ImageView, context: Context): Uri? {
         val out = FileOutputStream(file)
         bmp.compress(Bitmap.CompressFormat.PNG, 90, out)
         out.close()
-        bmpUri = Uri.fromFile(file)
+        //bmpUri = Uri.fromFile(file)
+        bmpUri = FileProvider.getUriForFile(context, context.applicationContext.packageName + ".provider", file)
     } catch (e: IOException) {
         e.printStackTrace()
     }

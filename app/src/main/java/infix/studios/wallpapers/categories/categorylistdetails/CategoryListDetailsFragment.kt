@@ -2,6 +2,8 @@ package infix.studios.wallpapers.categories.categorylistdetails
 
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.content.pm.ResolveInfo
 import android.os.Bundle
 import android.view.*
 import android.widget.Toast
@@ -64,8 +66,16 @@ class CategoryListDetailsFragment : DaggerFragment() {
                 shareIntent.action = Intent.ACTION_SEND
                 shareIntent.putExtra(Intent.EXTRA_STREAM, bmpUri)
                 shareIntent.type = "image/*"
+                shareIntent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
                 // Launch sharing dialog for image
-                startActivity(Intent.createChooser(shareIntent, "Share Image"))
+                val chooser = Intent.createChooser(shareIntent, "Share Image")
+                val resInfoList: List<ResolveInfo> = requireActivity().packageManager
+                    .queryIntentActivities(chooser, PackageManager.MATCH_DEFAULT_ONLY)
+                for (resolveInfo in resInfoList) {
+                    val packageName = resolveInfo.activityInfo.packageName
+                    requireActivity().grantUriPermission(packageName, bmpUri, Intent.FLAG_GRANT_WRITE_URI_PERMISSION or Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                }
+                startActivity(chooser)
             } else {
                 // ...sharing failed, handle error
                 Timber.d("Sharing failed")
@@ -87,8 +97,12 @@ class CategoryListDetailsFragment : DaggerFragment() {
         when(item.itemId) {
             R.id.favorite_menu_icon -> {
                 if (currentMenuIcon.icon.constantState?.equals(
-                        ContextCompat.getDrawable(requireContext(),
-                            R.drawable.ic_unliked_favorite_24)?.constantState)!!) {
+                        ContextCompat.getDrawable(
+                            requireContext(),
+                            R.drawable.ic_unliked_favorite_24
+                        )?.constantState
+                    )!!
+                ) {
 
                     Toast.makeText(context, "Added to favorite", Toast.LENGTH_SHORT).show()
                     viewModel.saveFavoritePhoto(FavoritePhoto(url = args.url))

@@ -17,16 +17,15 @@
             android:layout_height="wrap_content"
             tools:context=".categories.CategoriesFragment">
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/cars_category_button"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginStart="1dp"
                 android:layout_marginEnd="1dp"
-                android:paddingTop="22dp"
-                android:paddingBottom="8dp"
                 android:layout_marginBottom="1dp"
-                android:drawableTop="@drawable/ic_car"
+                app:icon="@drawable/ic_car"
+                app:iconGravity="textStart"
                 android:insetTop="0dp"
                 android:insetBottom="0dp"
                 android:text="@string/cars"
@@ -37,7 +36,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/animals_category_button"
                 app:layout_constraintVertical_weight="1" />
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/animals_category_button"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
@@ -45,9 +44,8 @@
                 android:layout_marginTop="1dp"
                 android:layout_marginEnd="1dp"
                 android:layout_marginBottom="1dp"
-                android:paddingTop="22dp"
-                android:paddingBottom="8dp"
-                android:drawableTop="@drawable/ic_pets"
+                app:iconGravity="textStart"
+                app:icon="@drawable/ic_pets"
                 android:insetTop="0dp"
                 android:insetBottom="0dp"
                 android:text="@string/animals"
@@ -59,16 +57,15 @@
                 app:layout_constraintVertical_chainStyle="packed"
                 app:layout_constraintVertical_weight="1" />
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/sky_category_button"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginStart="1dp"
                 android:layout_marginEnd="1dp"
                 android:layout_marginBottom="1dp"
-                android:paddingTop="22dp"
-                android:paddingBottom="8dp"
-                android:drawableTop="@drawable/ic_cloud"
+                app:iconGravity="textStart"
+                app:icon="@drawable/ic_cloud"
                 android:insetTop="0dp"
                 android:insetBottom="0dp"
                 android:text="@string/sky_high"
@@ -79,16 +76,15 @@
                 app:layout_constraintTop_toBottomOf="@+id/cars_category_button"
                 app:layout_constraintVertical_weight="1" />
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/nature_category_button"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginStart="1dp"
                 android:layout_marginEnd="1dp"
                 android:layout_marginBottom="1dp"
-                android:paddingTop="22dp"
-                android:paddingBottom="8dp"
-                android:drawableTop="@drawable/ic_nature"
+                app:iconGravity="textStart"
+                app:icon="@drawable/ic_nature"
                 android:insetTop="0dp"
                 android:insetBottom="0dp"
                 android:text="@string/nature"
@@ -100,16 +96,15 @@
                 app:layout_constraintTop_toBottomOf="@+id/architecture_category_button"
                 app:layout_constraintVertical_weight="1" />
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/architecture_category_button"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginStart="1dp"
                 android:layout_marginEnd="1dp"
                 android:layout_marginBottom="1dp"
-                android:paddingTop="22dp"
-                android:paddingBottom="8dp"
-                android:drawableTop="@drawable/ic_business"
+                app:iconGravity="textStart"
+                app:icon="@drawable/ic_business"
                 android:insetTop="0dp"
                 android:insetBottom="0dp"
                 android:text="@string/architecture"
@@ -120,16 +115,15 @@
                 app:layout_constraintTop_toBottomOf="@+id/sky_category_button"
                 app:layout_constraintVertical_weight="1" />
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/art_category_button"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginStart="1dp"
                 android:layout_marginEnd="1dp"
                 android:layout_marginBottom="54dp"
-                android:paddingTop="22dp"
-                android:paddingBottom="8dp"
-                android:drawableTop="@drawable/ic_color_lens"
+                app:iconGravity="textStart"
+                app:icon="@drawable/ic_color_lens"
                 android:insetTop="0dp"
                 android:insetBottom="0dp"
                 android:text="@string/art"
